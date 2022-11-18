@@ -1,9 +1,9 @@
-import sampleNews from '../mockNewsData.json';
 import HeadlineCard from '../Components/HeadlineCard/HeadlineCard';
+import ArticlePage from './ArticlePage';
 
-const HeadlinePage = () => {
+const HeadlinePage = ({ news }) => {
 
-    const todaysNews = sampleNews.response.results.map(currentNews => {
+    const todaysNews = news.map(currentNews => {
 
         return <HeadlineCard key={currentNews.id} thumbnail={currentNews.fields.thumbnail} webTitle={currentNews.webTitle} />
     })
