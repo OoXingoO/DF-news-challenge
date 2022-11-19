@@ -1,19 +1,26 @@
+import { Link } from 'react-router-dom';
 import HeadlineCard from '../Components/HeadlineCard/HeadlineCard';
-import ArticlePage from './ArticlePage';
 
 const HeadlinePage = ({ news }) => {
 
     const todaysNews = news.map(currentNews => {
 
-        return <HeadlineCard key={currentNews.id} thumbnail={currentNews.fields.thumbnail} webTitle={currentNews.webTitle} />
+        // const newsId = currentNews.id.replaceAll('/', '-');
+
+        return (
+            <div key={currentNews.id}>
+                < Link to={`/articles/${currentNews.id.replaceAll("/", "-")}`} >
+                    < HeadlineCard thumbnail={currentNews.fields.thumbnail} webTitle={currentNews.webTitle} />
+                </Link>
+            </div>
+        )
+
     })
 
     return (
-        <a href='/'>
-            <div>
-                {todaysNews}
-            </div>
-        </a>
+        <div>
+            {todaysNews}
+        </div>
     )
 }
 

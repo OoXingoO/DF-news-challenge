@@ -1,6 +1,7 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Header from '../src/Components/Header&Footer/Header';
 import Footer from '../src/Components/Header&Footer/Footer';
@@ -14,8 +15,8 @@ function App() {
 
   const getNews = async () => {
     try {
-      const response = await axios.get(process.env.REACT_APP_NEWSDATA);
-      setNews(response.data.results);
+      const response = await axios.get(process.env.REACT_APP_NEWSDATA); //Get method retrieves information for given URI
+      setNews(response.data.response.results);
     } catch (error) {
       console.log(error);
       setErrorStatus(error.message);
@@ -29,17 +30,21 @@ function App() {
 
   return (
     <main>
-      {errorStatus && <p>There is an error: {errorStatus}</p>}
-      {!errorStatus && news.length === 0 ? <p>Data is loading</p> :
-        <>
-          <Header />
-          <div className='container'>
-            <HeadlinePage news={news} />
-            <ArticlePage news={news} />
-          </div>
-          <Footer />
-        </>
-      }
+      <Header />
+      <div className='container'>
+        <Router>
+          {errorStatus && <p>There is an error: {errorStatus}</p>}
+          {!errorStatus && news.length === 0 ? <p>Data is loading</p> :
+            <>
+              <Routes>
+                <Route path="/" element={<HeadlinePage news={news} />} />
+                <Route path="/articles/:id" element={<ArticlePage news={news} />} />
+              </Routes>
+            </>
+          }
+        </Router>
+      </div>
+      <Footer />
     </main>
   );
 }
