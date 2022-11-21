@@ -3,13 +3,13 @@ import HeadlineCard from '../Components/HeadlineCard/HeadlineCard';
 
 const HeadlinePage = ({ news }) => {
 
-    const todaysNews = news.map(currentNews => {
+    const todaysNews = news?.map(currentNews => {
 
-        // const newsId = currentNews.id.replaceAll('/', '-');
+        const newsId = currentNews.id.replaceAll('/', '-');
 
         return (
-            <div key={currentNews.id}>
-                < Link to={`/articles/${currentNews.id.replaceAll("/", "-")}`} >
+            <div key={newsId}>
+                < Link to={`/articles/${newsId}`} className='headline-link'>
                     < HeadlineCard thumbnail={currentNews.fields.thumbnail} webTitle={currentNews.webTitle} />
                 </Link>
             </div>
@@ -19,6 +19,7 @@ const HeadlinePage = ({ news }) => {
 
     return (
         <div>
+            <h2 className='welcome-text'>Welcome to DF News</h2>
             {todaysNews}
         </div>
     )

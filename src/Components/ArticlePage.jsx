@@ -7,21 +7,36 @@ const ArticlePage = ({ news }) => {
 
     const { id } = useParams();
 
-    const displayArticle = news.map(currentNews => {
+    // eslint-disable-next-line
+    const displayArticle = news?.map(currentNews => {
         const newsId = currentNews.id.replaceAll("/", "-");
         if (newsId === id) {
             return (
-                <div key={id}>
-                    <>
-                        <Thumbnail src={currentNews.fields.thumbnail} alt={currentNews.webTitle} />
-                        <HeadlineTitle title={currentNews.webTitle} />
-                        <p>{currentNews.fields.bodyText}</p>
-                    </>
-                </div>
+                <div key={newsId} className='row'>
+                    <Thumbnail src={currentNews.fields.thumbnail} alt={currentNews.webTitle} className="img-fluid" />
+                    <HeadlineTitle title={currentNews.fields.headline} />
+                    <p className='article-body'>{replaceEveryNth(currentNews.fields.bodyText, ". ", "\n", 3).split('\n').map(e => <>{e}<br /><br /></>)}</p>
+                    <Link to="/" className="article-link">Go back</Link>&nbsp;
+                    <a href={currentNews.webUrl} className="article-link" target='_blank' rel='noreferrer'>Read on guardian news here</a>
+                </div >
             )
         }
-        return <Link to="/">Go back</Link>
     })
+
+    function replaceEveryNth(value, search, replacement, nthCount = 1) {
+        let matchCount = 0;
+
+        return String(value)
+            .split(
+                RegExp(`(${search})`)
+            )
+            .map(str =>
+                ((str === search) && (++matchCount % nthCount === 0))
+                    ? replacement
+                    : str
+            )
+            .join('');
+    }
 
     return (
         <div>

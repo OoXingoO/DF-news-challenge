@@ -18,7 +18,6 @@ function App() {
       const response = await axios.get(process.env.REACT_APP_NEWSDATA); //Get method retrieves information for given URI
       setNews(response.data.response.results);
     } catch (error) {
-      console.log(error);
       setErrorStatus(error.message);
     }
   };
@@ -34,7 +33,7 @@ function App() {
       <div className='container'>
         <Router>
           {errorStatus && <p>There is an error: {errorStatus}</p>}
-          {!errorStatus && news.length === 0 ? <p>Data is loading</p> :
+          {!errorStatus && news.length === 0 ? <p>Loading News...</p> :
             <>
               <Routes>
                 <Route path="/" element={<HeadlinePage news={news} />} />
@@ -44,6 +43,7 @@ function App() {
           }
         </Router>
       </div>
+      <br />
       <Footer />
     </main>
   );

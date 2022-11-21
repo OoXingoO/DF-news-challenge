@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import HeadlinePage from '../Components/HeadlinePage';
 import sampleNews from '../mockNewsData.json';
 
@@ -12,9 +13,9 @@ test(`it should render the correct number of HeadlineCard components based on mo
 
     const sampleNewsLength = sampleNews.response.results.length
 
-    render(<HeadlinePage />);
+    render(<MemoryRouter><HeadlinePage news={sampleNews.response.results} /></MemoryRouter>);
 
-    const result = screen.getAllByTestId('testHeadlinePage').length;
+    const result = screen.getAllByTestId("testHeadlinePage").length;
 
     expect(result).toBe(sampleNewsLength);
 })
