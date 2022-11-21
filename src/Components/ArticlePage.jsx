@@ -15,7 +15,7 @@ const ArticlePage = ({ news }) => {
                 <div key={newsId} className='row'>
                     <Thumbnail src={currentNews.fields.thumbnail} alt={currentNews.webTitle} className="img-fluid" />
                     <HeadlineTitle title={currentNews.fields.headline} />
-                    <p className='article-body'>{replaceEveryNth(currentNews.fields.bodyText, ". ", "\n", 3).split('\n').map(e => <>{e}<br /><br /></>)}</p>
+                    <p className='article-body'>{replaceEveryNth(currentNews.fields.bodyText, ". ", ".\n", 3).split('\n').map(e => <>{e}<br /><br /></>)}</p>
                     <Link to="/" className="article-link">Go back</Link>&nbsp;
                     <a href={currentNews.webUrl} className="article-link" target='_blank' rel='noreferrer'>Read on guardian news here</a>
                 </div >

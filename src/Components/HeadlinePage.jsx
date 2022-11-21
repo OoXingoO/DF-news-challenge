@@ -14,7 +14,6 @@ const HeadlinePage = ({ news }) => {
                 </Link>
             </div>
         )
-
     })
 
     return (
