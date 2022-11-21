@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
-import Header from '../Components/Header';
-import Footer from '../Components/Footer';
+import Header from '../Components/Header&Footer/Header';
+import Footer from '../Components/Header&Footer/Footer';
 
 test(`Header matches snapshot`, () => {
     const headerComponent = render(<Header />);
